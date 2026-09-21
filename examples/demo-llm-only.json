@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "application": "Fictional Orders API",
+  "environment": "production",
+  "assessment_date": "2026-09-21",
+  "input_sha256": "b9b2baeb0260ad7b72655d26270543a70a6ce04212e3e51dd2f03135e3cb47f7",
+  "strategy": "llm-only",
+  "threshold": 0.85,
+  "threshold_is_calibrated": false,
+  "migration_approved": false,
+  "results": [
+    {
+      "question_id": "ci",
+      "route": "llm",
+      "status": "proposed_answer",
+      "answer": "Yes",
+      "reason": "LLM synthesis of supplied evidence; citations are checked for membership, not entailment.",
+      "review_required": true,
+      "context_evidence_ids": [
+        "E1"
+      ],
+      "citations": [
+        {
+          "evidence_id": "E1",
+          "quote": "Builds and unit tests run on every commit."
+        }
+      ],
+      "missing_evidence": []
+    },
+    {
+      "question_id": "encryption",
+      "route": "llm",
+      "status": "insufficient",
+      "answer": null,
+      "reason": "LLM synthesis of supplied evidence; citations are checked for membership, not entailment.",
+      "review_required": true,
+      "context_evidence_ids": [
+        "E2"
+      ],
+      "citations": [
+        {
+          "evidence_id": "E2",
+          "quote": "Connection encryption has not been verified."
+        }
+      ],
+      "missing_evidence": [
+        "Runtime TLS configuration for every scoped database connection."
+      ]
+    },
+    {
+      "question_id": "tomcat",
+      "route": "llm",
+      "status": "proposed_answer",
+      "answer": "An as-is move to plain Tomcat is not established: the application uses container-managed EJB services. Inventory those dependencies, plan their replacement, and run compatibility tests before approving a target.",
+      "reason": "LLM synthesis of supplied evidence; citations are checked for membership, not entailment.",
+      "review_required": true,
+      "context_evidence_ids": [
+        "E3"
+      ],
+      "citations": [
+        {
+          "evidence_id": "E3",
+          "quote": "The application uses container-managed EJB services."
+        }
+      ],
+      "missing_evidence": []
+    },
+    {
+      "question_id": "funding",
+      "route": "human",
+      "status": "owner_confirmation_required",
+      "answer": null,
+      "reason": "Mandatory owner gate; no model was asked to approve this item.",
+      "review_required": true,
+      "context_evidence_ids": [],
+      "citations": []
+    },
+    {
+      "question_id": "recovery",
+      "route": "llm",
+      "status": "conflicting",
+      "answer": null,
+      "reason": "LLM synthesis of supplied evidence; citations are checked for membership, not entailment.",
+      "review_required": true,
+      "context_evidence_ids": [
+        "E4",
+        "E5"
+      ],
+      "citations": [
+        {
+          "evidence_id": "E4",
+          "quote": "The approved RTO is 30 minutes."
+        },
+        {
+          "evidence_id": "E5",
+          "quote": "The approved RTO is 120 minutes."
+        }
+      ],
+      "missing_evidence": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "source": "fictional://pipeline/report-2026-09-20",
+      "environment": "production",
+      "observed_at": "2026-09-20",
+      "content": "This report maps the active pipeline to the production Orders API repository. Builds and unit tests run on every commit. Twenty successful executions are recorded this week."
+    },
+    {
+      "id": "E2",
+      "source": "fictional://database/config-export",
+      "environment": "production",
+      "observed_at": "2026-09-20",
+      "content": "The Orders API database has encryption at rest enabled. Connection encryption has not been verified."
+    },
+    {
+      "id": "E3",
+      "source": "fictional://architecture/server-dependencies",
+      "environment": "production",
+      "observed_at": "2026-09-15",
+      "content": "The application uses container-managed EJB services. The current application server supplies these services. Plain Tomcat does not provide this EJB container. A replacement implementation and compatibility tests have not been completed."
+    },
+    {
+      "id": "E4",
+      "source": "fictional://operations/recovery-policy",
+      "environment": "production",
+      "observed_at": "2026-09-17",
+      "content": "The approved RTO is 30 minutes."
+    },
+    {
+      "id": "E5",
+      "source": "fictional://business/recovery-policy",
+      "environment": "production",
+      "observed_at": "2026-09-17",
+      "content": "The approved RTO is 120 minutes."
+    }
+  ],
+  "metrics": {
+    "jev_calls": 0,
+    "llm_calls": 4,
+    "jev_resolved_questions": 0,
+    "actual_cost_usd": null
+  },
+  "execution_mode": "demo",
+  "simulated": true,
+  "provider_calls": [
+    {
+      "provider": "llm",
+      "model": "DEMO-NOT-A-MODEL",
+      "usage": null
+    },
+    {
+      "provider": "llm",
+      "model": "DEMO-NOT-A-MODEL",
+      "usage": null
+    },
+    {
+      "provider": "llm",
+      "model": "DEMO-NOT-A-MODEL",
+      "usage": null
+    },
+    {
+      "provider": "llm",
+      "model": "DEMO-NOT-A-MODEL",
+      "usage": null
+    }
+  ]
+}

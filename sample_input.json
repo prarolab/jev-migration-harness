@@ -1,0 +1,84 @@
+{
+  "application": "Fictional Orders API",
+  "environment": "production",
+  "as_of": "2026-09-21",
+  "evidence": [
+    {
+      "id": "E1",
+      "source": "fictional://pipeline/report-2026-09-20",
+      "environment": "production",
+      "observed_at": "2026-09-20",
+      "content": "This report maps the active pipeline to the production Orders API repository. Builds and unit tests run on every commit. Twenty successful executions are recorded this week."
+    },
+    {
+      "id": "E2",
+      "source": "fictional://database/config-export",
+      "environment": "production",
+      "observed_at": "2026-09-20",
+      "content": "The Orders API database has encryption at rest enabled. Connection encryption has not been verified."
+    },
+    {
+      "id": "E3",
+      "source": "fictional://architecture/server-dependencies",
+      "environment": "production",
+      "observed_at": "2026-09-15",
+      "content": "The application uses container-managed EJB services. The current application server supplies these services. Plain Tomcat does not provide this EJB container. A replacement implementation and compatibility tests have not been completed."
+    },
+    {
+      "id": "E4",
+      "source": "fictional://operations/recovery-policy",
+      "environment": "production",
+      "observed_at": "2026-09-17",
+      "content": "The approved RTO is 30 minutes."
+    },
+    {
+      "id": "E5",
+      "source": "fictional://business/recovery-policy",
+      "environment": "production",
+      "observed_at": "2026-09-17",
+      "content": "The approved RTO is 120 minutes."
+    }
+  ],
+  "questions": [
+    {
+      "id": "ci",
+      "text": "Is continuous integration actively used for this application?",
+      "rubric": "Yes requires recent execution evidence for commit-triggered builds and tests in the application repository. A pipeline file alone is insufficient. No requires explicit evidence that CI is not used.",
+      "kind": "choice",
+      "choices": {"Yes": "Active CI meets the rubric.", "No": "CI is explicitly not in use."},
+      "evidence_ids": ["E1"]
+    },
+    {
+      "id": "encryption",
+      "text": "Is application data encrypted both at rest and on database connections?",
+      "rubric": "Yes requires evidence of encryption at rest AND on all scoped database connections. Partial evidence is insufficient. No requires explicit unencrypted storage or connections.",
+      "kind": "choice",
+      "choices": {"Yes": "Both encryption scopes are evidenced.", "No": "At least one scope is explicitly unencrypted."},
+      "evidence_ids": ["E2"]
+    },
+    {
+      "id": "tomcat",
+      "text": "Describe the implications of replacing the application server with plain Tomcat.",
+      "rubric": "Describe only documented dependencies, gaps and necessary work. Do not assert successful compatibility or a completed test.",
+      "kind": "narrative",
+      "evidence_ids": ["E3"]
+    },
+    {
+      "id": "funding",
+      "text": "Has migration funding been approved?",
+      "rubric": "Requires accountable-owner confirmation of an approved funding record.",
+      "kind": "choice",
+      "choices": {"Yes": "Funding approved.", "No": "Funding not approved."},
+      "evidence_ids": [],
+      "requires_owner": true
+    },
+    {
+      "id": "recovery",
+      "text": "Is the approved RTO at most 60 minutes?",
+      "rubric": "Evaluate the currently approved RTO. If authoritative records disagree, return a conflict rather than selecting a preferred record.",
+      "kind": "choice",
+      "choices": {"Yes": "Approved RTO is at most 60 minutes.", "No": "Approved RTO exceeds 60 minutes."},
+      "evidence_ids": ["E4", "E5"]
+    }
+  ]
+}
