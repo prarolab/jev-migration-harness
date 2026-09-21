@@ -1,5 +1,7 @@
 # Jev + LLM Harness (POC)
 
+[![Repo](https://img.shields.io/badge/GitHub-prarolab%2Fjev--migration--harness-blue?logo=github)](https://github.com/prarolab/jev-migration-harness)
+
 A small reference implementation of a **cost-aware decision harness** that pairs
 [Jev](https://docs.typesafe.ai/) (TypeSafe AI's typed, non-generative decision
 model) with an LLM agent, orchestrated in [LangChain](https://www.langchain.com/).
@@ -31,28 +33,7 @@ repo is a working sketch of that split, built while exploring
 
 ## Architecture
 
-```text
-Collect evidence
-(inventory, code, approved docs, LLM extraction where needed)
-            |
-Versioned application state
-(claims + source, component/environment scope, freshness)
-            |
-Policy and exact lookups
-(resolve verified facts directly, require accountable approvals,
- send everything else to Jev)
-            |
-Jev routing classification
-            |
-      +-----------+------------------+
-      |                               |
-Bounded Jev answer          LLM agent investigation
-                              or Human / unresolved
-      |                               |
-      +---------------+---------------+
-                       |
-            Reviewable, evidence-linked result
-```
+![Architecture: Evidence and a question go to Jev, which routes to a bounded answer, an LLM agent, or human review; all three converge on a reviewable, evidence-linked result.](./docs/architecture.png)
 
 Design rules the code enforces:
 
