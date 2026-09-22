@@ -24,8 +24,7 @@ harness itself is domain-agnostic.
 ## Why this exists
 
 Jev returns typed, probabilistic answers (`Noul`, `Choice`, `Score`) instead of
-generated text — see [TypeSafe's docs](https://docs.typesafe.ai/primitives) and
-[Aman Arora's intro post](https://amaarora.github.io/posts/2026-19-09-jev-intro.html).
+generated text.
 That makes it a candidate for the many small, bounded decisions inside a larger
 workflow, while an LLM agent stays responsible for open-ended analysis. This
 repo is a working sketch of that split, built while exploring
